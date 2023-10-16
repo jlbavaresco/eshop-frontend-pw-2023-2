@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import ProdutoContext from "./ProdutoContext";
 import Alerta from "../../comuns/Alerta";
+import { formatoMoeda } from '../../comuns/Uteis'
 
 function Tabela() {
 
@@ -57,7 +58,7 @@ function Tabela() {
                                     <td>{objeto.descricao}</td>
                                     <td>{objeto.quantidade_estoque}</td>
                                     <td>{objeto.ativo ? 'SIM' : 'NÃO'}</td>
-                                    <td>{objeto.valor}</td>
+                                    <td>{formatoMoeda(objeto.valor)}</td>
                                     <td>{objeto.data_cadastro}</td>
                                     <td>{objeto.categoria_nome}</td>
                                 </tr>

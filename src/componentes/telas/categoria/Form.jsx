@@ -7,6 +7,26 @@ function Form() {
     const { objeto, handleChange, acaoCadastrar, alerta }
         = useContext(CategoriaContext);
 
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
     return (
         <div className="modal fade" id="modalEdicao"
             tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -16,25 +36,32 @@ function Form() {
                         <h1 className="modal-title fs-5" id="exampleModalLabel">Categoria</h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formulario" onSubmit={acaoCadastrar}>
+                    <form id="formulario" onSubmit={acaoCadastrar}
+                        className="needs-validation" noValidate>
                         <div className="modal-body">
                             <Alerta alerta={alerta} />
                             <div className="mb-3">
-                                <label for="txtCodigo" 
-                                className="form-label">Código</label>
-                                <input type="number" className="form-control" 
-                                id="txtCodigo"
-                                readOnly name="codigo" value={objeto.codigo}
-                                onChange={handleChange}/>
+                                <label for="txtCodigo"
+                                    className="form-label">Código</label>
+                                <input type="number" className="form-control"
+                                    id="txtCodigo"
+                                    readOnly name="codigo" value={objeto.codigo}
+                                    onChange={handleChange} />
                             </div>
                             <div className="mb-3">
-                                <label for="txtNome" 
-                                className="form-label">Nome</label>
-                                <input type="text" className="form-control" 
-                                id="txtNome" placeholder="Informe o nome"
-                                required name="nome" value={objeto.nome}
-                                onChange={handleChange}/>
-                            </div>                            
+                                <label for="txtNome"
+                                    className="form-label">Nome</label>
+                                <input type="text" className="form-control"
+                                    id="txtNome" placeholder="Informe o nome"
+                                    required name="nome" value={objeto.nome}
+                                    onChange={handleChange} />
+                                <div className="valid-feedback">
+                                    Nome ok
+                                </div>
+                                <div className="invalid-feedback">
+                                    Informe o nome
+                                </div>
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary"

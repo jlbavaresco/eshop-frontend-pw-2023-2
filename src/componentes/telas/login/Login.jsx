@@ -48,8 +48,8 @@ function Login(){
             if (token != null){
                 setAutenticado(true);
             } 
-        }catch(err){
-            setAlerta({status : "error" , message : err.message});
+        }catch(err){      
+            setAlerta({status : "error" , message : err != null ? err.message : ""});
         }
     },[]);
 
